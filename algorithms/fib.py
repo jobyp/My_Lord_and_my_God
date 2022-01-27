@@ -56,9 +56,14 @@ def fib4(n: int) -> Generator[int, None, None]:
 
 def main():
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 50
+
     print("fib3({}) is {}".format(n, fib3(n)))
-    for i in fib4(50):
+    for i in fib4(n):
         print(i)
+
+    x = fib3(n)
+    print(sys.getsizeof(x))  # sys.getsizeof() to calculate memory used by an object
+
     return 0
 
 
