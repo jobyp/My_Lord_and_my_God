@@ -14,4 +14,5 @@ func main() {
 	fmt.Println("O Jesus, I surrender myself to you, take care of everything!")
 	fmt.Println("Mother, I'm yours now and forever.")
 	fmt.Println("Through you and with you I always want to belong completely to Jesus.")
+	fmt.Println("Jesus, Mary, Joseph, I love you. Save souls!")
 }
