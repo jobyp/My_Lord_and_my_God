@@ -4,6 +4,7 @@ PROGS:=$(wildcard *.py)
 all:
 	. ~/.py3_classic_algorithms/bin/activate; black $(PROGS)
 	mypy $(PROGS)
+	chmod +x $(PROGS)
 
 .PHONY: setup
 setup:
