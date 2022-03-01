@@ -1,4 +1,5 @@
 PROGS:=$(patsubst %.c,%,$(wildcard *.c))
+CC:=gcc
 
 .PHONY: all
 all: $(PROGS)
@@ -12,7 +13,7 @@ all: $(PROGS)
 
 # -save-temps
 %.o : %.c
-	$(CC) -c -pedantic -Werror -Wextra -Og -Wall -std=c17 -lm -o $@ $<
+	$(CC) -c -pedantic -Werror -Wextra -O -g3 -Wall -std=c17 -lm -o $@ $<
 
 .PHONY: clean
 clean:
