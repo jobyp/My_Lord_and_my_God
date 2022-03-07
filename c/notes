@@ -1,0 +1,23 @@
+valgrind -q --tool=memcheck --leak-check=yes ./hw
+
+
+to print size_t, use %zu
+to print double, use %g
+
+
+musl libc build
+===============
+cd $HOME;
+git clone git://git.musl-libc.org/musl
+git branch -D release || true
+git checkout -b release v1.2.2
+cd $HOME/src/musl;
+./configure --prefix=$HOME/musl --disable-shared --exec-prefix=$HOME --s
+yslibdir=$HOME/musl/lib
+make
+make install
+
+
+;; Local Variables:
+;; mode: text
+;; End:
