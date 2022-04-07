@@ -1,21 +1,74 @@
+valgrind
+========
 valgrind -q --tool=memcheck --leak-check=yes ./hw
-
-
-to print size_t, use %zu
-to print double, use %g
-
 
 musl libc build
 ===============
 cd $HOME;
 git clone git://git.musl-libc.org/musl
 git branch -D release || true
-git checkout -b release v1.2.2
+git checkout -b release v1.2.3
 cd $HOME/src/musl;
 ./configure --prefix=$HOME/musl --disable-shared --exec-prefix=$HOME --s
 yslibdir=$HOME/musl/lib
 make
 make install
+
+scalar types
+============
+
+size_t	-> print %zu %zx
+double	-> print %e, %f, %g, %a
+signed (int) -> %d
+unsigned     -> %u
+bool	     -> %d (as 0 or 1)
+
+ptrdiff_t    -> %td
+char const*  -> %s
+char 	     -> %c
+void*	     -> %p
+
+unsigned char -> %hhu, %02hhx
+
+
+control statements
+==================
+
+case values in switch statement must be integer constant expressions.
+>> case labels must not jump beyond a variable definition
+
+size_t -> [0, SIZE_MAX]
+
+Arithmetic on size_t implicitily does the computation %(SIZE_MAX + 1)
+
+
+4 classes of basic types
+========================
+unsigned integers
+signed integers
+real floating point numbers
+complex floating point numbers
+
+narrow types = {
+       bool,
+       unsigned char,
+       unsigned short,
+       char,
+       signed char,
+       signed short  (aka short),
+}
+
+Before arithmetic narrow types are promoted to "signed int".
+The char type is special since, it can be unsigned or signed depending
+on the platform.
+
+time_t and clock_t
+
+clock_t values present the platform's model of processor clock cycles,
+so the unit of time is much less than a second; CLOCKS_PER_SEC can
+be used to convert such values to second.
+
+enumeration constants are of type "signed int"
 
 
 ;; Local Variables:
