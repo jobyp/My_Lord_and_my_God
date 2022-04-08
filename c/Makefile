@@ -1,5 +1,8 @@
 PROGS:=$(patsubst %.c,%,$(wildcard *.c))
+
 CC:=musl-gcc -static
+
+# https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
 CFLAGS:=-pedantic -Werror -Wextra -O -g3 -Wall -std=c18 \
 	-Wconversion -Warith-conversion -Wdouble-promotion \
 	-Wuninitialized -Wformat=2
