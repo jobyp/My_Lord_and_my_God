@@ -1,0 +1,10 @@
+#!/bin/bash
+
+program=$@
+[[ -z "${program[0]}" ]] && echo "usage: vg <PROGRAM>" && exit 1
+
+valgrind -q --tool=memcheck --leak-check=yes ${program[@]}
+
+# Local Variables:
+# mode: sh
+# End:

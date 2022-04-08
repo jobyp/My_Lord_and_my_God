@@ -1,0 +1,7 @@
+#!/bin/sh
+
+emacsclient -nw -create-frame --alternate-editor="" $@
+
+exit 0
+
+
