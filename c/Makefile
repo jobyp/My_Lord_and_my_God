@@ -3,8 +3,12 @@ PROGS:=$(patsubst %.c,%,$(wildcard *.c))
 CC:=musl-gcc -static
 
 # https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
+
+# gcc 8.5.0 on Centos Stream (8.5++) doesn't support
+# -Warith-conversion
+
 CFLAGS:=-pedantic -Werror -Wextra -O -g3 -Wall -std=c18 \
-	-Wconversion -Warith-conversion -Wdouble-promotion \
+	-Wconversion  -Wdouble-promotion \
 	-Wuninitialized -Wformat=2
 
 LDFLAGS:=-lm
