@@ -14,7 +14,7 @@ fi
 
 pushd musl
 git branch -D release || true
-git checkout -b release $(git describe --tags --abbrev=0)
+#git checkout -b release $(git describe --tags --abbrev=0)
 make distclean
 [[ -d $HOME/musl ]] && rm -rf $HOME/musl
 ./configure --prefix=$HOME/musl --disable-shared --exec-prefix=$HOME --syslibdir=$HOME/musl/lib

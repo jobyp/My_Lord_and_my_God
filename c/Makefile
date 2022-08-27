@@ -7,8 +7,10 @@ CC:=musl-gcc -static
 # gcc 8.5.0 on Centos Stream (8.5++) doesn't support
 # -Warith-conversion
 
-CFLAGS:=-pedantic -Werror -Wextra -O -g3 -Wall -std=c18 \
-	-Wconversion  -Wdouble-promotion \
+# gnu18 = c18 + POSIX + GNU extensions
+
+CFLAGS:=-pedantic -Werror -Wextra -O -g3 -Wall -std=gnu18 \
+	-Wconversion  -Wdouble-promotion -Warith-conversion \
 	-Wuninitialized -Wformat=2
 
 LDFLAGS:=-lm
