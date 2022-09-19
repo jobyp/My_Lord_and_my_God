@@ -7,10 +7,14 @@ CC:=musl-gcc -static
 # gcc 8.5.0 on Centos Stream (8.5++) doesn't support
 # -Warith-conversion
 
+# yum install gcc-toolset-10.x86_64
+# For GCC 10, do the following in .bashrc
+# . /opt/rh/gcc-toolset-10/enable
+
 # gnu18 = c18 + POSIX + GNU extensions
 
 CFLAGS:=-pedantic -Werror -Wextra -O -g3 -Wall -std=gnu18 \
-	-Wconversion  -Wdouble-promotion -Warith-conversion \
+	-Wconversion -Warith-conversion -Wdouble-promotion \
 	-Wuninitialized -Wformat=2
 
 LDFLAGS:=-lm
