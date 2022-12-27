@@ -1,6 +1,13 @@
 PROGS:=$(patsubst %.c,%,$(wildcard *.c))
 
 CC:=musl-gcc -static
+#CC:=gcc
+
+# https://developers.redhat.com/blog/2018/03/21/compiler-and-linker-flags-gcc
+# https://developers.redhat.com/articles/2022/06/07/how-debug-stack-frames-and-recursion-gdb#
+
+# https://www.tiobe.com/tiobe-index/
+# https://godbolt.org/
 
 # https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
 
@@ -20,7 +27,7 @@ CFLAGS:=-pedantic -Werror -Wextra -O -g3 -Wall -std=gnu18 \
 LDFLAGS:=-lm
 
 .PHONY: all
-all: hw
+all: hw linked_list
 	@:
 
 %: %.c
