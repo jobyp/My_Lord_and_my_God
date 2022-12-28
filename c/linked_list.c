@@ -189,7 +189,9 @@ digit *create_digit(int num)
 
 digit *append(digit *tail, digit *node)
 {
-	tail->next = node;
+	if (tail != NULL) {
+		tail->next = node;
+	}
 	return node;
 }
 
@@ -214,13 +216,14 @@ digit *read_number(void)
 		n = (int)(c - '0');
 		d = create_digit(n);
 
+		// If this is the first digit we have read
+		// head of list should point to this node.
 		if (hd == NULL) {
 			hd = d;
-			tl = d;
 		}
-		else {
-			tl = append(tl,  d);
-		}
+
+		// update tail pointer.
+		tl = append(tl,  d);
 	}
 
 	return hd;
