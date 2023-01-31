@@ -1,0 +1,57 @@
+JMJ
+
+ssize_t read(int fd, void *buf, size_t len);
+
+It's legal for read() to return a positive nonzero value less than len. This
+can happen for a number of reasons: less than len bytes have been available,
+the system call may have been interrupted by a signal, the pipe may have
+broken, and so on.
+
+read() system call returns 0 to indicate end-of-file (EOF). EOF is not an
+error; it simply indicates that the file position has advanced past the last
+valid offset in the file and thus there is nothing else to read. If, however,
+a call is mode for len bytes, but no bytes are available for reading, the call
+will block (sleep) until the bytes become available.
+
+Some errors are recoverable. For example, if a call to read() is interrupted
+by a signal before any bytest are read, it returns -1, and errno is set to
+EINTR.
+
+Indeed, a call to read() can result in many possibilities:
+
+        => The call returns a value equal to len. All len read bytes are
+           stored in buf. The results are as intended.
+
+        => The call returns a value less than len, but greater than zero. The
+           read bytes are stored in buf. This occurs because a signal
+           interrupted the read midway; an error occurred in the middle of the
+           read; more than zero, but less than len bytes' worth of data was
+           available; or EOF was reached before len bytes were read. Reissuing
+           the read() (with correspondingly updated buf and len values) will
+           read the remaining bytes into the rest of the buffer or indicate
+           the cause of the problem.
+
+        => The call returns 0. This indicates EOF. There is nothing to read.
+
+        => The call blocks because no data is currently available. This won't
+           happen in non-blocking mode.
+
+        => The call returns -1, and errno is set to EINTR. This indicates that
+           a signla was received before any bytes were read. The call can be
+           reissued.
+
+        => The call returns -1, and errno is set to EAGAIN or EWOULDBLOCK.
+           This indicates that read would block because no data is currently
+           available, and that request should be reissued later. This happens
+           only in nonblocking mode.
+
+        => The call returns -1, and errno is set to a value other than EINTR,
+           EAGAIN or EWOULDBLOCK. This indicates a more serious error. Simply
+           reissuing the read is unlikely to succeed.
+
+
+
+
+;; Local Variables:
+;; mode: text
+;; End:
