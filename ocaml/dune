@@ -1,0 +1,8 @@
+(executable
+ (name hw)
+ (link_flags
+  (:standard -cclib -static)))
+
+;; Local Variables:
+;; mode: lisp
+;; End:
